@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
+    public float climbSpeed;
     bool readyToJump;
 
     [Header("Keybinds")]
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool grounded;
 
+    public GameManager manager; 
 
     public Transform orientation;
     float horizontalInput;
@@ -32,8 +34,16 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    [Header("Inspector Based Variables")]
+    public LayerMask wallLayer;
+    public GameObject cameraObj;
+
+    [Header("Private variables")]
+    private bool wallClimbing;
+
     private void Start()
     {
+        wallClimbing = false;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
@@ -55,6 +65,18 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = groundDrag;
         else
             rb.drag = 0;
+
+
+        Debug.DrawRay(transform.position + new Vector3(0f, playerHeight / 2, 0), transform.TransformDirection(cameraObj.transform.rotation * Vector3.forward) * 50f, Color.red);
+        if(Physics.Raycast(transform.position + new Vector3(0f, playerHeight / 2, 0), transform.TransformDirection(cameraObj.transform.rotation * Vector3.forward), 1.0f, wallLayer))
+        {
+            wallClimbing = true;
+            Debug.Log("see wall");
+        }
+        else
+        {
+            wallClimbing = false;
+        }
     }
 
     private void OnDrawGizmos()
@@ -66,14 +88,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MovePlayer();
+        if (wallClimbing)
+        {
+            ClimbWalls();
+        }
+        else
+        {
+            MovePlayer();
+        }
     }
 
     private void GetInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && readyToJump && grounded && !wallClimbing)
         {
             readyToJump = false;
             Jump();
@@ -115,4 +144,14 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
     }
 
+    private void ClimbWalls()
+    {
+        if (wallClimbing)
+        {
+            GetInput();
+            moveDirection = orientation.up * verticalInput + orientation.right * horizontalInput;
+            //rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            transform.position += moveDirection.normalized * climbSpeed * Time.deltaTime;
+        }
+    }
 }
