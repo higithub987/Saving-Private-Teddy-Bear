@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
 
     //Declare Stuff here
-
+    public bool wallClimbing;
 
 
     // Start is called before the first frame update
@@ -19,5 +19,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void setClimbing(bool status)
+    {
+        wallClimbing = status;
     }
 }
