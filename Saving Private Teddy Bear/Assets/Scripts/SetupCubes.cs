@@ -53,6 +53,7 @@ public class SetupCubes : MonoBehaviour
             }
         }
     }
+
     // Update is called once per frame
     void Update()
     {
