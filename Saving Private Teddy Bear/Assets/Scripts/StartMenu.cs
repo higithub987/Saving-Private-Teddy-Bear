@@ -5,8 +5,11 @@ using TMPro;
 
 public class StartMenu : MonoBehaviour
 {
+<<<<<<< Updated upstream
 
     public GameManager manage;
+=======
+>>>>>>> Stashed changes
     // Start is called before the first frame update
     void Start()
     {

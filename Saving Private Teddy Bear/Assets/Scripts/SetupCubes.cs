@@ -40,9 +40,9 @@ public class SetupCubes : MonoBehaviour
     {
         for (int i = 0; i < arr.Length; i++)
         {
-            for (int j = 0; j < arr.GetLength(1); j++)
+            for (int j = 0; j < arr.GetLength(i); j++)
             {
-                if (arr[i, j] == 1)
+                if (arr[i,j] == 1)
                 {
                     GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     cube.transform.position = new Vector3((i * 2), 1, (j * 2));
