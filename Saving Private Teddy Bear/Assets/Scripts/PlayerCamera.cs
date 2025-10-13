@@ -38,7 +38,7 @@ public class PlayerCamera : MonoBehaviour
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
 
         //check for interactable objects
-        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        Ray ray = new Ray(this.gameObject.transform.position, this.gameObject.transform.forward);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, rayDistance, hitMask)) {
