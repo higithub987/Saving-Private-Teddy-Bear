@@ -5,12 +5,11 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class StartMenu : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
-
     //declare public variables here
     public GameManager manager;
-    public SoundManager SoundManager;
+    
 
     //declare GameObjects here
     [SerializeField]
@@ -24,24 +23,53 @@ public class StartMenu : MonoBehaviour
     [SerializeField]
     private Button HoldButton;
 
-
     //declare private variables here
+    private SoundManager SoundManager;
     private Color BaseColor;
     private Color SelectedColor = Color.gray;
+    private bool isPaused;
+
+
+    private void Awake()
+    {
+        SoundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        MenuHolder.SetActive(true);
+        MenuHolder.SetActive(false);
         SettingsHolder.SetActive(false);
         BaseColor = HoldButton.image.color;
         ToggleButton.image.color = SelectedColor;
+        VolumeSlider.value = SoundManager.GetVolume() / 100f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //Tab for testing, change to Escape before building
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (isPaused)
+            {
+                isPaused = false;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                Time.timeScale = 1;
+                MenuHolder.SetActive(false);
+                SettingsHolder.SetActive(false);
+            }
+            else
+            {
+                isPaused = true;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 0;
+                MenuHolder.SetActive(true);
+                SettingsHolder.SetActive(false);
+            }
+        }
     }
 
     public void EndGame()
@@ -49,16 +77,10 @@ public class StartMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void StartGame()
+    public void ResetGame()
     {
-        //SampleScene is our main scene, with index 1
-        SceneManager.LoadScene(1);
-    }
-
-    public void Tutorial()
-    {
-        //Tutorial scene has index 2
-        SceneManager.LoadScene(2);
+        //start scene has index 0
+        SceneManager.LoadScene(0);
     }
 
     public void OpenSettings()
