@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Inspector Based Variables")]
     public LayerMask wallLayer;
     public GameObject cameraObj;
+    public InteractablesUI interactablesui;
 
     [Header("Private variables")]
     private bool wallClimbing;
@@ -85,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.Raycast(transform.position + new Vector3(0f, playerHeight / 10, 0), 
             transform.TransformDirection(cameraObj.transform.rotation * Vector3.forward), 1.0f, wallLayer))
         {
+            interactablesui.showWallClimb();
             CanWallClimb = true;
             Debug.Log("see wall");
         }
