@@ -29,6 +29,11 @@ public class StartMenu : MonoBehaviour
     private Color BaseColor;
     private Color SelectedColor = Color.gray;
 
+
+    private void Awake()
+    {
+        manager = GameObject.Find("Gamemanager").GetComponent<GameManager>();
+    }
     // Start is called before the first frame update
     void Start()
     {

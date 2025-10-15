@@ -38,7 +38,7 @@ public class SetupCubes : MonoBehaviour
 ,{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
     void Start()
     {
-        for (int i = 0; i < arr.Length; i++)
+        /*for (int i = 0; i < arr.Length; i++)
         {
             for (int j = 0; j < arr.GetLength(i); j++)
             {
@@ -51,7 +51,7 @@ public class SetupCubes : MonoBehaviour
                 }
 
             }
-        }
+        }*/
     }
 
     // Update is called once per frame

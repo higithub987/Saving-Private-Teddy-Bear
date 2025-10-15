@@ -40,9 +40,22 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Private variables")]
     private bool wallClimbing;
+    private bool ToggleHold;
+    private bool ClimbKeyHeld;
+    private bool CanWallClimb;
+    private bool isWallClimbing;
+    private KeyCode InteractKey;
 
+
+    private void Awake()
+    {
+        manager = GameObject.Find("Gamemanager").GetComponent<GameManager>();
+    }
     private void Start()
     {
+        isWallClimbing = false;
+        ClimbKeyHeld = false;
+        InteractKey = KeyCode.E;
         wallClimbing = false;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -66,17 +79,63 @@ public class PlayerMovement : MonoBehaviour
         else
             rb.drag = 0;
 
-
-        Debug.DrawRay(transform.position + new Vector3(0f, playerHeight / 2, 0), transform.TransformDirection(cameraObj.transform.rotation * Vector3.forward) * 50f, Color.red);
-        if(Physics.Raycast(transform.position + new Vector3(0f, playerHeight / 2, 0), transform.TransformDirection(cameraObj.transform.rotation * Vector3.forward), 1.0f, wallLayer))
+        //sets distance to see if wallclimb is possible
+        Debug.DrawRay(transform.position + new Vector3(0f, playerHeight / 10, 0),
+        transform.TransformDirection(cameraObj.transform.rotation * Vector3.forward) * 50f, Color.red);
+        if (Physics.Raycast(transform.position + new Vector3(0f, playerHeight / 10, 0), 
+            transform.TransformDirection(cameraObj.transform.rotation * Vector3.forward), 1.0f, wallLayer))
         {
-            wallClimbing = true;
+            CanWallClimb = true;
             Debug.Log("see wall");
         }
         else
         {
-            wallClimbing = false;
+            CanWallClimb = false;
         }
+        //checks to see if wallclimb is toggle or hold
+        ToggleHold = manager.ToggleHold();
+        
+        //if toggle
+        if (ToggleHold)
+        {
+            if (!CanWallClimb)
+            {
+                ClimbKeyHeld = false;
+                isWallClimbing = false;
+                wallClimbing = false;
+            }
+            Debug.Log("Is Wall Climbing " + isWallClimbing);
+            //check to see if the key to press for interacting gets pressed and wallclimb is possible
+            if (Input.GetKeyDown(InteractKey) && CanWallClimb && !isWallClimbing)
+            {
+                ClimbKeyHeld = true;
+                isWallClimbing = true;
+            }
+            else if(Input.GetKeyDown(InteractKey) && isWallClimbing)
+            {
+                //if already wallclimbing and toggle again to stop, stop wallclimbing
+                wallClimbing = false;
+                isWallClimbing = false;
+                ClimbKeyHeld = false;
+                Debug.Log("run");
+            }
+
+            Debug.Log("Climb KeyHeld: " + ClimbKeyHeld);
+        }
+
+        else
+        {
+            if (Input.GetKey(InteractKey) && CanWallClimb)
+            {
+                ClimbKeyHeld = true;
+            }
+            else
+            {
+                ClimbKeyHeld = false;
+            }
+        }
+        
+        wallClimbing = ClimbKeyHeld && CanWallClimb;
     }
 
     private void OnDrawGizmos()
@@ -146,12 +205,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void ClimbWalls()
     {
-        if (wallClimbing)
-        {
             GetInput();
             moveDirection = orientation.up * verticalInput + orientation.right * horizontalInput;
-            //rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-            transform.position += moveDirection.normalized * climbSpeed * Time.deltaTime;
-        }
+            rb.velocity = moveDirection.normalized * moveSpeed;
+            //transform.position += moveDirection.normalized * climbSpeed * Time.deltaTime;
+        
     }
 }
