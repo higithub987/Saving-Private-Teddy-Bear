@@ -88,11 +88,11 @@ public class PlayerMovement : MonoBehaviour
         {
             interactablesui.showWallClimb();
             CanWallClimb = true;
-            Debug.Log("see wall");
         }
         else
         {
             CanWallClimb = false;
+            interactablesui.HideWallClimb();
         }
         //checks to see if wallclimb is toggle or hold
         ToggleHold = manager.ToggleHold();
@@ -106,12 +106,12 @@ public class PlayerMovement : MonoBehaviour
                 isWallClimbing = false;
                 wallClimbing = false;
             }
-            Debug.Log("Is Wall Climbing " + isWallClimbing);
             //check to see if the key to press for interacting gets pressed and wallclimb is possible
             if (Input.GetKeyDown(InteractKey) && CanWallClimb && !isWallClimbing)
             {
                 ClimbKeyHeld = true;
                 isWallClimbing = true;
+                interactablesui.showWallClimb();
             }
             else if(Input.GetKeyDown(InteractKey) && isWallClimbing)
             {
@@ -119,10 +119,12 @@ public class PlayerMovement : MonoBehaviour
                 wallClimbing = false;
                 isWallClimbing = false;
                 ClimbKeyHeld = false;
-                Debug.Log("run");
             }
 
-            Debug.Log("Climb KeyHeld: " + ClimbKeyHeld);
+            if (isWallClimbing)
+            {
+                interactablesui.HideWallClimb();
+            }
         }
 
         else
@@ -136,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
                 ClimbKeyHeld = false;
             }
         }
-        
+
         wallClimbing = ClimbKeyHeld && CanWallClimb;
     }
 

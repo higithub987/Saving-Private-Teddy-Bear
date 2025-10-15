@@ -666,6 +666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
   WallClimbHolder: {fileID: 305796841}
+  InteractablesHolder: {fileID: 1095018700}
   climbTextStart: {fileID: 1663764298}
 --- !u!1 &305796841
 GameObject:
