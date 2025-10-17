@@ -19,6 +19,7 @@ public class InteractableBehavior : MonoBehaviour
             rb = gameObject.AddComponent<Rigidbody>();
             rb.AddTorque(Vector3.right * 20, ForceMode.Impulse);
             StartCoroutine(ChangeVase());
+            GameManager.distractions.Add(rb.transform.position, 3);        
         }
     }
 

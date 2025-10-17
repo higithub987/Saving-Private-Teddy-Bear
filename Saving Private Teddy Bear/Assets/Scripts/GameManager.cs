@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     //Declare Stuff here
     public bool wallClimbing;
     public bool ToggleHoldWallClimb; //true when toggle, false when hold
-
+    public static Dictionary<Vector3, int> distractions = new Dictionary<Vector3, int>();
     void Awake()
     {
         if (Instance == null)

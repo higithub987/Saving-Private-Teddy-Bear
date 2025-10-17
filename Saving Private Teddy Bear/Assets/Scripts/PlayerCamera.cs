@@ -10,8 +10,6 @@ public class PlayerCamera : MonoBehaviour
     public Transform orientation;
 
     public float rayDistance;
-    public LayerMask hitMask;
-    public GameObject interactableUI;
 
     float xRotation;
     float yRotation;
@@ -36,17 +34,5 @@ public class PlayerCamera : MonoBehaviour
         // rotating camera and orientation
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-
-        //check for interactable objects
-        /*(Ray ray = new Ray(this.gameObject.transform.position, this.gameObject.transform.forward);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, rayDistance, hitMask)) {
-            interactableUI.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.E))
-                hit.collider.GetComponent<InteractableBehavior>().behavior();
-        } else {
-            interactableUI.SetActive(false);
-        }*/
     }
 }
