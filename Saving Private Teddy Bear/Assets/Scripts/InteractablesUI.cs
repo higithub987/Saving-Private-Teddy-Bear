@@ -13,6 +13,8 @@ public class InteractablesUI : MonoBehaviour
     //Various Menu Holders
     public GameObject WallClimbHolder;
     public GameObject InteractablesHolder;
+    public GameObject InteractablePopup;
+
 
     //Various UI elements
     public TextMeshProUGUI climbTextStart;
@@ -30,6 +32,7 @@ public class InteractablesUI : MonoBehaviour
     {
         InteractablesHolder.SetActive(false);
         WallClimbHolder.SetActive(false);
+        InteractablePopup.SetActive(false);
     }
 
     // Update is called once per frame
@@ -40,7 +43,7 @@ public class InteractablesUI : MonoBehaviour
 
     public void showWallClimb()
     {
-        
+
         ShowInteractables();
         WallClimbHolder.SetActive(true);
         if (manager.ToggleHold())
@@ -53,11 +56,23 @@ public class InteractablesUI : MonoBehaviour
         }
     }
 
-    public void HideWallClimb()
+    public void ShowInteractablesUI()
     {
         
+        ShowInteractables();
+        InteractablePopup.SetActive(true);
+    }
+
+    public void HideWallClimb()
+    {
+
         HideInteractables();
         WallClimbHolder.SetActive(false);
+    }
+    public void HideInteractablesUI()
+    {
+        HideInteractables();
+        InteractablePopup.SetActive(false);
     }
 
     public void ShowInteractables()
