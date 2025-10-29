@@ -122,4 +122,14 @@ public class PauseMenu : MonoBehaviour
         ToggleButton.image.color = BaseColor;
         HoldButton.image.color = SelectedColor;
     }
+
+    public void BackToGame()
+    {
+        isPaused = false;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1;
+        MenuHolder.SetActive(false);
+        SettingsHolder.SetActive(false);
+    }
 }
