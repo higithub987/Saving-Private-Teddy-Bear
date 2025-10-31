@@ -7,6 +7,7 @@ using UnityEngine;
 public class InteractableBehavior : MonoBehaviour
 {
     public String objectName;
+    public Camera cam;
     public void behavior()
     {
         if (objectName == "tester")
@@ -17,18 +18,41 @@ public class InteractableBehavior : MonoBehaviour
         {
             Rigidbody rb;
             rb = gameObject.AddComponent<Rigidbody>();
-            rb.AddTorque(Vector3.right * 20, ForceMode.Impulse);
+            rb.AddTorque(transform.forward * 20, ForceMode.VelocityChange);
+            rb.AddForce(transform.up * 0.1f, ForceMode.VelocityChange);
             StartCoroutine(ChangeVase());
             GameManager.distractions.Add(rb.transform.position, 3);        
+        } else if (objectName == "cup")
+        {
+            Rigidbody rb;
+            rb = gameObject.transform.parent.gameObject.AddComponent<Rigidbody>();
+            rb.AddTorque(transform.up * 20, ForceMode.VelocityChange);
+            rb.AddForce(transform.forward * 1.25f, ForceMode.VelocityChange);
+            StartCoroutine(ChangeCup());
+            GameManager.distractions.Add(rb.transform.position, 2);
         }
     }
 
     IEnumerator ChangeVase()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
         Destroy(GetComponent<Rigidbody>());
         GetComponent<MeshRenderer>().enabled = false;
         GetComponent<MeshCollider>().enabled = false;
+
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+    }
+    IEnumerator ChangeCup()
+    {
+        yield return new WaitForSeconds(0.6f);
+        Destroy(GetComponent<Rigidbody>());
+        GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<MeshCollider>().enabled = false;
+        transform.parent.Find("Torus").gameObject.SetActive(false);
+    
 
         foreach (Transform child in transform)
         {
