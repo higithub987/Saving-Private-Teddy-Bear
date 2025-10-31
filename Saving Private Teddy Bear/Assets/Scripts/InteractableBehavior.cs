@@ -21,8 +21,9 @@ public class InteractableBehavior : MonoBehaviour
             rb.AddTorque(transform.forward * 20, ForceMode.VelocityChange);
             rb.AddForce(transform.up * 0.1f, ForceMode.VelocityChange);
             StartCoroutine(ChangeVase());
-            GameManager.distractions.Add(rb.transform.position, 3);        
-        } else if (objectName == "cup")
+            GameManager.distractions.Add(rb.transform.position, 3);
+        }
+        else if (objectName == "cup")
         {
             Rigidbody rb;
             rb = gameObject.transform.parent.gameObject.AddComponent<Rigidbody>();
@@ -30,6 +31,16 @@ public class InteractableBehavior : MonoBehaviour
             rb.AddForce(transform.forward * 1.25f, ForceMode.VelocityChange);
             StartCoroutine(ChangeCup());
             GameManager.distractions.Add(rb.transform.position, 2);
+        }
+        else if (objectName == "ball")
+        {
+            Rigidbody rb;
+            Vector3 forceApplicationDirection = new Vector3(cam.transform.forward.x, 0, cam.transform.forward.z).normalized;
+            rb = gameObject.AddComponent<Rigidbody>();
+            rb.AddTorque(transform.forward * -20, ForceMode.VelocityChange);
+            rb.AddForce(forceApplicationDirection * 2f, ForceMode.VelocityChange);
+            rb.transform.gameObject.layer = LayerMask.NameToLayer("Player");
+            GameManager.distractions.Add(rb.transform.position, 1);
         }
     }
 
