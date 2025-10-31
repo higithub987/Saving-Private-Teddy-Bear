@@ -21,6 +21,8 @@ public class TutorialUI : MonoBehaviour
     private Button ToggleButton;
     [SerializeField]
     private Button HoldButton;
+    [SerializeField]
+    private TextMeshProUGUI Tutorialtext;
 
 
     //declare private variables here
@@ -28,6 +30,8 @@ public class TutorialUI : MonoBehaviour
     private Color BaseColor;
     private Color SelectedColor = Color.gray;
     private bool isPaused;
+    private bool WPressed, APressed, SPressed, DPressed = false;
+    private bool WallClimbed, InteractableUsed, ParentDistracted = false;
 
 
     private void Awake()
