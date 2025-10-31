@@ -123,6 +123,8 @@ public class TutorialUI : MonoBehaviour
             Debug.Log("runed");
             WallClimbed = true;
         }
+        InteractableUsed = InteractableBehavior.tutorialInteracted;
+
     }
 
     public void EndGame()
