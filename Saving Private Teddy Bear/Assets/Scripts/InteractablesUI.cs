@@ -43,7 +43,7 @@ public class InteractablesUI : MonoBehaviour
 
     public void showWallClimb()
     {
-
+        
         ShowInteractables();
         WallClimbHolder.SetActive(true);
         if (manager.ToggleHold())
@@ -65,13 +65,10 @@ public class InteractablesUI : MonoBehaviour
 
     public void HideWallClimb()
     {
-
-        HideInteractables();
         WallClimbHolder.SetActive(false);
     }
     public void HideInteractablesUI()
     {
-        HideInteractables();
         InteractablePopup.SetActive(false);
     }
 
@@ -82,6 +79,7 @@ public class InteractablesUI : MonoBehaviour
 
     public void HideInteractables()
     {
+        Debug.Log("???");
         InteractablesHolder.SetActive(false);
     }
 }

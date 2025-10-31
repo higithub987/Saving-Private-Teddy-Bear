@@ -97,20 +97,6 @@ public class PlayerMovement : MonoBehaviour
             CanWallClimb = false;
             interactablesui.HideWallClimb();
         }
-
-    RaycastHit hit;
-    if (Physics.Raycast(cam.transform.position, cam.transform.forward,out hit, 1.5f, interactableLayer))
-    {
-        interactablesui.ShowInteractablesUI();
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            hit.collider.GetComponent<InteractableBehavior>().behavior();
-        }
-    }
-    else
-    {
-    interactablesui.HideInteractablesUI();
-    }
         //checks to see if wallclimb is toggle or hold
         ToggleHold = manager.ToggleHold();
         
@@ -157,6 +143,20 @@ public class PlayerMovement : MonoBehaviour
         }
 
         wallClimbing = ClimbKeyHeld && CanWallClimb;
+
+        RaycastHit hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 1.5f, interactableLayer))
+        {
+            interactablesui.ShowInteractablesUI();
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                hit.collider.GetComponent<InteractableBehavior>().behavior();
+            }
+        }
+        else
+        {
+            interactablesui.HideInteractablesUI();
+        }
     }
 
     private void OnDrawGizmos()
