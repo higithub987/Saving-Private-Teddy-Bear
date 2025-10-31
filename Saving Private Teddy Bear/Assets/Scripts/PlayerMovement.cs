@@ -143,6 +143,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         wallClimbing = ClimbKeyHeld && CanWallClimb;
+        manager.setClimbing(wallClimbing);
 
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 1.5f, interactableLayer))

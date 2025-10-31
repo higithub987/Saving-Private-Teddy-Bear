@@ -23,6 +23,10 @@ public class TutorialUI : MonoBehaviour
     private Button HoldButton;
     [SerializeField]
     private TextMeshProUGUI Tutorialtext;
+    [SerializeField]
+    private GameObject TutorialWall;
+    [SerializeField]
+    private GameObject WallClimbStuff;
 
 
     //declare private variables here
@@ -30,8 +34,20 @@ public class TutorialUI : MonoBehaviour
     private Color BaseColor;
     private Color SelectedColor = Color.gray;
     private bool isPaused;
-    private bool WPressed, APressed, SPressed, DPressed = false;
+    private bool WPressed, APressed, SPressed, DPressed, SpacePressed = false;
     private bool WallClimbed, InteractableUsed, ParentDistracted = false;
+    private List<string> texts = new List<string> {
+        "Welcome to Saving Private Teddy Bear!\n Press W to move forward and start the game!",//0
+        "Press A to move right. ",//1
+        "Press D to move left. ",//2
+        "Press S to move backwards",//3
+        "Press Space to Jump. ",//4
+        "Try to climb the wall! ",//5
+        "Walk up to the vase and see what happens!", //6
+        "Notice how the parent is now distracted? ",//7
+        "Congratulations on finishing the tutorial! Press Escape and start the game! "//8
+    };
+
 
 
     private void Awake()
@@ -44,16 +60,19 @@ public class TutorialUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        TutorialWall.SetActive(false);
         MenuHolder.SetActive(false);
         SettingsHolder.SetActive(false);
         BaseColor = HoldButton.image.color;
         ToggleButton.image.color = SelectedColor;
         VolumeSlider.value = SoundManager.GetVolume() / 100f;
+        Tutorialtext.text = "Welcome to Saving Private Teddy Bear!\n Press W to move forward and start the game!";
     }
 
     // Update is called once per frame
     void Update()
     {
+        int textind = SetTutorialText();
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (isPaused)
@@ -74,6 +93,35 @@ public class TutorialUI : MonoBehaviour
                 MenuHolder.SetActive(true);
                 SettingsHolder.SetActive(false);
             }
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            WPressed = true;
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            APressed = true;
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SPressed = true;
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            DPressed = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SpacePressed = true;
+        }
+        if(textind >= 5)
+        {
+            TutorialWall.SetActive(true);
+        }
+        if(textind >= 5 && manager.getWallClimb())
+        {
+            Debug.Log("runed");
+            WallClimbed = true;
         }
     }
 
@@ -131,5 +179,20 @@ public class TutorialUI : MonoBehaviour
     {
         ToggleButton.image.color = BaseColor;
         HoldButton.image.color = SelectedColor;
+    }
+
+    private int SetTutorialText()
+    {
+        int WInt = WPressed ? 1 : 0;
+        int AInt = APressed ? 1 : 0;
+        int DInt = DPressed ? 1 : 0;
+        int SInt = SPressed ? 1 : 0;
+        int SpaceInt = SpacePressed ? 1 : 0;
+        int InteractablesInt = InteractableUsed ? 1 : 0;
+        int WallInt = WallClimbed ? 1 : 0;
+        int ParentInt = ParentDistracted ? 1 : 0;
+        int textindex = WInt + AInt + DInt + SInt + InteractablesInt + WallInt + ParentInt + SpaceInt;
+        Tutorialtext.text = texts[textindex];
+        return textindex;
     }
 }
