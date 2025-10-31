@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
     RaycastHit hit;
-    if (Physics.Raycast(cam.transform.position, cam.transform.forward,out hit, 1.5f, interactableLayer))
+    if (Physics.Raycast(cam.transform.position, cam.transform.forward,out hit, 2f, interactableLayer))
     {
         interactablesui.ShowInteractablesUI();
         if (Input.GetKeyDown(KeyCode.E))
