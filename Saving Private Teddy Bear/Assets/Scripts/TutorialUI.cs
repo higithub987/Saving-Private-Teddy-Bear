@@ -27,6 +27,8 @@ public class TutorialUI : MonoBehaviour
     private GameObject TutorialWall;
     [SerializeField]
     private GameObject WallClimbStuff;
+    [SerializeField]
+    private GameObject InteractableVase;
 
 
     //declare private variables here
@@ -66,7 +68,8 @@ public class TutorialUI : MonoBehaviour
         BaseColor = HoldButton.image.color;
         ToggleButton.image.color = SelectedColor;
         VolumeSlider.value = SoundManager.GetVolume() / 100f;
-        Tutorialtext.text = "Welcome to Saving Private Teddy Bear!\n Press W to move forward and start the game!";
+        InteractableVase.SetActive(false);
+        SetTutorialText();
     }
 
     // Update is called once per frame
@@ -120,11 +123,13 @@ public class TutorialUI : MonoBehaviour
         }
         if(textind >= 5 && manager.getWallClimb())
         {
-            Debug.Log("runed");
             WallClimbed = true;
         }
         InteractableUsed = InteractableBehavior.tutorialInteracted;
-
+        if(textind >= 6)
+        {
+            InteractableVase.SetActive(true);
+        }
     }
 
     public void EndGame()
