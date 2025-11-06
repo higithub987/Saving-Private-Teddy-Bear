@@ -3511,6 +3511,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 979115f55646a7d448810e261ff4ba26, type: 3}
+--- !u!1 &1387640789 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2686880996593333467, guid: 979115f55646a7d448810e261ff4ba26, type: 3}
+  m_PrefabInstance: {fileID: 1387640788}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1412628787
 GameObject:
   m_ObjectHideFlags: 0
@@ -3773,6 +3778,7 @@ MonoBehaviour:
   Tutorialtext: {fileID: 218239789}
   TutorialWall: {fileID: 36933156}
   WallClimbStuff: {fileID: 554084753}
+  InteractableVase: {fileID: 1387640789}
 --- !u!114 &1462845059
 MonoBehaviour:
   m_ObjectHideFlags: 0
