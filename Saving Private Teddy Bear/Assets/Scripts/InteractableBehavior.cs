@@ -8,13 +8,14 @@ public class InteractableBehavior : MonoBehaviour
 {
     public String objectName;
     public Camera cam;
+    public bool tutorialInteracted = false;
     public void behavior()
     {
         if (objectName == "tester")
         {
             Destroy(gameObject);
         }
-        else if (objectName == "vase")
+        else if (objectName == "vase" || objectName == "tutorvase")
         {
             Rigidbody rb;
             rb = gameObject.AddComponent<Rigidbody>();
@@ -22,6 +23,10 @@ public class InteractableBehavior : MonoBehaviour
             rb.AddForce(transform.up * 0.1f, ForceMode.VelocityChange);
             StartCoroutine(ChangeVase());
             GameManager.distractions.Add(rb.transform.position, 3);
+            if (objectName == "tutorvase")
+            {
+                tutorialInteracted = true;
+            }
         }
         else if (objectName == "cup")
         {
