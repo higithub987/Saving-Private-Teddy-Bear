@@ -83,14 +83,19 @@ public class PlayerMovement : MonoBehaviour
         else
             rb.drag = 0;
 
-        //sets distance to see if wallclimb is possible
+        //sets distance to see if wallclimb is possible 
+        RaycastHit hit;
         Debug.DrawRay(transform.position + new Vector3(0f, playerHeight / 10, 0),
         transform.TransformDirection(cameraObj.transform.rotation * Vector3.forward) * 50f, Color.red);
         if (Physics.Raycast(transform.position + new Vector3(0f, playerHeight / 10, 0),
-            transform.TransformDirection(cameraObj.transform.rotation * Vector3.forward), 1.0f, wallLayer))
+            transform.TransformDirection(cameraObj.transform.rotation * Vector3.forward), out hit, 1.0f, wallLayer))
         {
-            interactablesui.showWallClimb();
-            CanWallClimb = true;
+            if(!(hit.point.y < transform.position.y))
+            {
+                interactablesui.showWallClimb();
+                CanWallClimb = true;
+            }
+            
         }
         else
         {
@@ -145,10 +150,11 @@ public class PlayerMovement : MonoBehaviour
         wallClimbing = ClimbKeyHeld && CanWallClimb;
         manager.setClimbing(wallClimbing);
 
-        RaycastHit hit;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 1.5f, interactableLayer))
+        RaycastHit hit2;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit2, 1.5f, interactableLayer))
         {
             interactablesui.ShowInteractablesUI();
+            interactablesui.HideWallClimb();
             if (Input.GetKeyDown(KeyCode.E))
             {
                 hit.collider.GetComponent<InteractableBehavior>().behavior();

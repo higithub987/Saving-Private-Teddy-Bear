@@ -79,7 +79,6 @@ public class InteractablesUI : MonoBehaviour
 
     public void HideInteractables()
     {
-        Debug.Log("???");
         InteractablesHolder.SetActive(false);
     }
 }
