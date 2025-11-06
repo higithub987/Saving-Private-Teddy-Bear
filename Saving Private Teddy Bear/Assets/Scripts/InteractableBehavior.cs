@@ -8,7 +8,7 @@ public class InteractableBehavior : MonoBehaviour
 {
     public String objectName;
     public Camera cam;
-    public bool tutorialInteracted = false;
+    public static bool tutorialInteracted = false;
     public void behavior()
     {
         if (objectName == "tester")
