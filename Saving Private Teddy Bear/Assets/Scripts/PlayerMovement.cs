@@ -157,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
             interactablesui.HideWallClimb();
             if (Input.GetKeyDown(KeyCode.E))
             {
-                hit.collider.GetComponent<InteractableBehavior>().behavior();
+                hit2.collider.GetComponent<InteractableBehavior>().behavior();
             }
         }
         else
