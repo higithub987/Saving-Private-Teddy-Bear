@@ -8,6 +8,8 @@ public class ParentAI : MonoBehaviour
     public GameManager manager;
 
     public float distanceCutoff = 10.0f;
+    public float cleanupDelay;
+    public float distractionDelayScaling = 2.0f;
 
     [SerializeField]
     private NavMeshAgent parent; 
@@ -15,7 +17,9 @@ public class ParentAI : MonoBehaviour
     //private stuff
     private bool activeTracking = false;
     private bool trackingObj = false;
+    private bool cleaning = false; //jank way to stop the thing if it's cleaning without coroutines
     private Vector3 MaxValObj;
+    private float timer = 0f;
 
     private void Awake()
     {
@@ -31,7 +35,19 @@ public class ParentAI : MonoBehaviour
     void Update()
     {
         activeTracking = !(GameManager.distractions.Count == 0);
-        if (activeTracking)
+        //this is highest priority, do everything else in else if
+        if (cleaning)
+        {
+            timer += Time.deltaTime;
+            
+            if(timer >= cleanupDelay)
+            {
+                cleaning = false;
+                GameManager.distractions.Remove(MaxValObj);
+            }
+            return;
+        }
+        else if (activeTracking)
         {
             if (!trackingObj)
             {
@@ -61,6 +77,11 @@ public class ParentAI : MonoBehaviour
                         MaxValObj = key;
                     }
                 }
+            }
+            if(transform.position == MaxValObj)
+            {
+                cleanupDelay = GameManager.distractions[MaxValObj] * distractionDelayScaling;
+                cleaning = true;
             }
         }
     }
