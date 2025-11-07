@@ -22,7 +22,7 @@ public class InteractableBehavior : MonoBehaviour
             rb.AddTorque(transform.forward * 20, ForceMode.VelocityChange);
             rb.AddForce(transform.up * 0.1f, ForceMode.VelocityChange);
             StartCoroutine(ChangeVase());
-            GameManager.distractions.Add(rb.transform.position, 3);
+            GameManager.distractions.Add(rb.transform.position, Tuple.Create(3, this.gameObject));
             if (objectName == "tutorvase")
             {
                 tutorialInteracted = true;
@@ -35,7 +35,7 @@ public class InteractableBehavior : MonoBehaviour
             rb.AddTorque(transform.up * 20, ForceMode.VelocityChange);
             rb.AddForce(transform.forward * 1.25f, ForceMode.VelocityChange);
             StartCoroutine(ChangeCup());
-            GameManager.distractions.Add(rb.transform.position, 2);
+            GameManager.distractions.Add(rb.transform.position, Tuple.Create(2, this.gameObject));
         }
         else if (objectName == "ball")
         {
@@ -45,7 +45,7 @@ public class InteractableBehavior : MonoBehaviour
             rb.AddTorque(transform.forward * -20, ForceMode.VelocityChange);
             rb.AddForce(forceApplicationDirection * 2f, ForceMode.VelocityChange);
             rb.transform.gameObject.layer = LayerMask.NameToLayer("Player");
-            GameManager.distractions.Add(rb.transform.position, 1);
+            GameManager.distractions.Add(rb.transform.position, Tuple.Create(1, this.gameObject));
         }
     }
 

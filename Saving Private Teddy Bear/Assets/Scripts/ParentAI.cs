@@ -43,6 +43,7 @@ public class ParentAI : MonoBehaviour
             if(timer >= cleanupDelay)
             {
                 cleaning = false;
+                Destroy(GameManager.distractions[MaxValObj].Item2);
                 GameManager.distractions.Remove(MaxValObj);
             }
             return;
@@ -55,7 +56,7 @@ public class ParentAI : MonoBehaviour
                 foreach (Vector3 key in GameManager.distractions.Keys)
                 {
                     float tempval = Vector3.Distance(transform.position, key)
-                        * GameManager.distractions[key];
+                        * GameManager.distractions[key].Item1;
                     if (maxval < tempval)
                     {
                         maxval = tempval;
@@ -71,7 +72,7 @@ public class ParentAI : MonoBehaviour
                 foreach (Vector3 key in GameManager.distractions.Keys)
                 {
                     float tempval = Vector3.Distance(transform.position, key)
-                        * GameManager.distractions[key];
+                        * GameManager.distractions[key].Item1;
                     if (distanceCutoff < tempval)
                     {
                         MaxValObj = key;
@@ -80,7 +81,7 @@ public class ParentAI : MonoBehaviour
             }
             if(transform.position == MaxValObj)
             {
-                cleanupDelay = GameManager.distractions[MaxValObj] * distractionDelayScaling;
+                cleanupDelay = GameManager.distractions[MaxValObj].Item1 * distractionDelayScaling;
                 cleaning = true;
             }
         }

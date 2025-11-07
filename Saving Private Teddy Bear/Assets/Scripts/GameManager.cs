@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class GameManager : MonoBehaviour
     //Declare Stuff here
     public bool wallClimbing;
     public bool ToggleHoldWallClimb; //true when toggle, false when hold
-    public static Dictionary<Vector3, int> distractions = new Dictionary<Vector3, int>();
+    public static Dictionary<Vector3, Tuple<int, GameObject>> distractions = new Dictionary<Vector3, Tuple<int, GameObject>>();
     void Awake()
     {
         if (Instance == null)
