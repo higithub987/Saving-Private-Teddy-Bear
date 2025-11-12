@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Inspector Based Variables")]
     public LayerMask wallLayer;
     public LayerMask interactableLayer;
+    public LayerMask teddyLayer;
 
     public GameObject cameraObj;
     public Camera cam;
@@ -87,6 +88,8 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         Debug.DrawRay(transform.position + new Vector3(0f, playerHeight / 10, 0),
         transform.TransformDirection(cameraObj.transform.rotation * Vector3.forward) * 50f, Color.red);
+
+
         if (Physics.Raycast(transform.position + new Vector3(0f, playerHeight / 10, 0),
             transform.TransformDirection(cameraObj.transform.rotation * Vector3.forward), out hit, 1.0f, wallLayer))
         {
@@ -150,19 +153,34 @@ public class PlayerMovement : MonoBehaviour
         wallClimbing = ClimbKeyHeld && CanWallClimb;
         manager.setClimbing(wallClimbing);
 
-        RaycastHit hit2;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit2, 1.5f, interactableLayer))
+
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 1.5f, interactableLayer))
         {
             interactablesui.ShowInteractablesUI();
             interactablesui.HideWallClimb();
             if (Input.GetKeyDown(KeyCode.E))
             {
-                hit2.collider.GetComponent<InteractableBehavior>().behavior();
+                hit.collider.GetComponent<InteractableBehavior>().behavior();
             }
         }
         else
         {
             interactablesui.HideInteractablesUI();
+        }
+
+        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 1.5f, teddyLayer))
+        {
+            interactablesui.showTeddy();
+            interactablesui.HideInteractablesUI();
+            interactablesui.HideWallClimb();
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                manager.GetTeddy();
+            }
+        }
+        else
+        {
+            interactablesui.hideTeddy();
         }
     }
 

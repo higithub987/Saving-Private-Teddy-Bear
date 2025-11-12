@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class GameManager : MonoBehaviour
     public bool wallClimbing;
     public bool ToggleHoldWallClimb; //true when toggle, false when hold
     public static Dictionary<Vector3, Tuple<int, GameObject>> distractions = new Dictionary<Vector3, Tuple<int, GameObject>>();
+
+
+    //private variables here
+    private bool hasTeddy, wonGame = false;
+
     void Awake()
     {
         if (Instance == null)
@@ -60,5 +66,21 @@ public class GameManager : MonoBehaviour
     public bool ToggleHold()
     {
         return ToggleHoldWallClimb;
+    }
+
+    public void GetTeddy()
+    {
+        hasTeddy = true;
+    }
+
+    public void winGame()
+    {
+        wonGame = true;
+        SceneManager.LoadScene(3); //3 is win
+    }
+
+    public void loseGame()
+    {
+        SceneManager.LoadScene(4); //4 is lose
     }
 }

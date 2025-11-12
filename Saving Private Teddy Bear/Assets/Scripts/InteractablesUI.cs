@@ -14,6 +14,7 @@ public class InteractablesUI : MonoBehaviour
     public GameObject WallClimbHolder;
     public GameObject InteractablesHolder;
     public GameObject InteractablePopup;
+    public GameObject TeddyPopup;
 
 
     //Various UI elements
@@ -33,6 +34,7 @@ public class InteractablesUI : MonoBehaviour
         InteractablesHolder.SetActive(false);
         WallClimbHolder.SetActive(false);
         InteractablePopup.SetActive(false);
+        TeddyPopup.SetActive(false);
     }
 
     // Update is called once per frame
@@ -80,5 +82,15 @@ public class InteractablesUI : MonoBehaviour
     public void HideInteractables()
     {
         InteractablesHolder.SetActive(false);
+    }
+
+    public void showTeddy()
+    {
+        TeddyPopup.SetActive(true);
+    }
+
+    public void hideTeddy()
+    {
+        TeddyPopup.SetActive(false);
     }
 }
