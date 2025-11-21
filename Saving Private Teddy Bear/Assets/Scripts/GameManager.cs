@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public bool wallClimbing;
     public bool ToggleHoldWallClimb; //true when toggle, false when hold
     public static Dictionary<Vector3, Tuple<int, GameObject>> distractions = new Dictionary<Vector3, Tuple<int, GameObject>>();
+    public TeddyAI teddy;
 
 
     //private variables here
@@ -68,9 +69,10 @@ public class GameManager : MonoBehaviour
         return ToggleHoldWallClimb;
     }
 
-    public void GetTeddy()
+    public void GetTeddy(GameObject tar)
     {
         hasTeddy = true;
+        teddy.SetHooman(tar);
     }
 
     public void winGame()

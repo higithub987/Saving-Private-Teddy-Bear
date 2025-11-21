@@ -175,7 +175,7 @@ public class PlayerMovement : MonoBehaviour
             interactablesui.HideWallClimb();
             if (Input.GetKeyDown(KeyCode.E))
             {
-                manager.GetTeddy();
+                manager.GetTeddy(this.gameObject);
             }
         }
         else
