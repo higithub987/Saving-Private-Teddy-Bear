@@ -15,8 +15,6 @@ public class GameManager : MonoBehaviour
     public bool ToggleHoldWallClimb; //true when toggle, false when hold
     public static Dictionary<Vector3, Tuple<int, GameObject>> distractions = new Dictionary<Vector3, Tuple<int, GameObject>>();
     public TeddyAI teddy;
-    [SerializeField]
-    private float winroomX1, winroomX2, winroomZ1, winroomZ2;
 
 
     //private variables here
@@ -86,25 +84,5 @@ public class GameManager : MonoBehaviour
     public void loseGame()
     {
         SceneManager.LoadScene(4); //4 is lose
-    }
-
-    public float getWinRoomX1()
-    {
-        return winroomX1;
-    }
-
-    public float getWinRoomX2()
-    {
-        return winroomX2;
-    }
-
-    public float getWinRoomZ2()
-    {
-        return winroomZ2;
-    }
-
-    public float getWinRoomZ1()
-    {
-        return winroomZ1;
     }
 }
