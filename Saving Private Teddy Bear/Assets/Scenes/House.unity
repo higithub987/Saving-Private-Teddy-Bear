@@ -8312,6 +8312,7 @@ MonoBehaviour:
   WallClimbHolder: {fileID: 372830487}
   InteractablesHolder: {fileID: 433709107}
   InteractablePopup: {fileID: 1343584879}
+  TeddyPopup: {fileID: 0}
   climbTextStart: {fileID: 1301168802}
 --- !u!114 &1532658999
 MonoBehaviour:
