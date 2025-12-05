@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Reporting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -8,6 +9,11 @@ public class GameManager : MonoBehaviour
     //Singleton
     public static GameManager Instance;
 
+    public enum Scenes
+    {
+        START_SCENE = 0,
+        SAMPLE_SCENE = 1
+    }
     //Declare Stuff here
     public bool wallClimbing;
     public bool ToggleHoldWallClimb; //true when toggle, false when hold
