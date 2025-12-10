@@ -7,6 +7,10 @@ public class SoundManager : MonoBehaviour
 
     //declare variables here
     public float SoundVolume;
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip buttonSound, vaseSound, ballSound, cupSound;
 
     //Singleton
     public static SoundManager Instance;
@@ -44,5 +48,25 @@ public class SoundManager : MonoBehaviour
     public float GetVolume()
     {
         return SoundVolume;
+    }
+
+    public void PressButton()
+    {
+        audioSource.PlayOneShot(buttonSound, SoundVolume);
+    }
+
+    public void BreakVase()
+    {
+        audioSource.PlayOneShot(vaseSound, SoundVolume);
+    }
+
+    public void BounceBall()
+    {
+        audioSource.PlayOneShot(ballSound, SoundVolume);
+    }
+
+    public void BreakCup()
+    {
+        audioSource.PlayOneShot(cupSound, SoundVolume);
     }
 }
