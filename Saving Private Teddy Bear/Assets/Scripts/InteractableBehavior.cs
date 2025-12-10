@@ -9,6 +9,13 @@ public class InteractableBehavior : MonoBehaviour
     public String objectName;
     public Camera cam;
     public static bool tutorialInteracted = false;
+    public SoundManager soundmanager;
+
+
+    private void Awake()
+    {
+        soundmanager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+    }
     public void behavior()
     {
         if (objectName == "tester")
@@ -17,6 +24,7 @@ public class InteractableBehavior : MonoBehaviour
         }
         else if (objectName == "vase" || objectName == "tutorvase")
         {
+            
             Rigidbody rb;
             rb = gameObject.AddComponent<Rigidbody>();
             rb.AddTorque(transform.forward * 20, ForceMode.VelocityChange);
@@ -30,6 +38,7 @@ public class InteractableBehavior : MonoBehaviour
         }
         else if (objectName == "cup")
         {
+           
             Rigidbody rb;
             rb = gameObject.transform.parent.gameObject.AddComponent<Rigidbody>();
             rb.AddTorque(transform.up * 20, ForceMode.VelocityChange);
@@ -39,6 +48,7 @@ public class InteractableBehavior : MonoBehaviour
         }
         else if (objectName == "ball")
         {
+            
             Rigidbody rb;
             Vector3 forceApplicationDirection = new Vector3(cam.transform.forward.x, 0, cam.transform.forward.z).normalized;
             rb = gameObject.AddComponent<Rigidbody>();
@@ -46,6 +56,7 @@ public class InteractableBehavior : MonoBehaviour
             rb.AddForce(forceApplicationDirection * 2f, ForceMode.VelocityChange);
             rb.transform.gameObject.layer = LayerMask.NameToLayer("Player");
             GameManager.distractions.Add(rb.transform.position, Tuple.Create(1, this.gameObject));
+            soundmanager.BounceBall();
         }
     }
 
@@ -60,6 +71,7 @@ public class InteractableBehavior : MonoBehaviour
         {
             child.gameObject.SetActive(true);
         }
+        soundmanager.BreakVase();
     }
     IEnumerator ChangeCup()
     {
@@ -74,5 +86,6 @@ public class InteractableBehavior : MonoBehaviour
         {
             child.gameObject.SetActive(true);
         }
+        soundmanager.BreakCup();
     }
 }

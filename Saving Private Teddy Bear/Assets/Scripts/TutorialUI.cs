@@ -67,7 +67,7 @@ public class TutorialUI : MonoBehaviour
         SettingsHolder.SetActive(false);
         BaseColor = HoldButton.image.color;
         ToggleButton.image.color = SelectedColor;
-        VolumeSlider.value = SoundManager.GetVolume() / 100f;
+        VolumeSlider.value = SoundManager.GetVolume();
         InteractableVase.SetActive(false);
         SetTutorialText();
     }
@@ -134,29 +134,34 @@ public class TutorialUI : MonoBehaviour
 
     public void EndGame()
     {
+        SoundManager.PressButton();
         Application.Quit();
     }
 
     public void StartGame()
     {
+        SoundManager.PressButton();
         //SampleScene is our main scene, with index 1
         SceneManager.LoadScene(1);
     }
 
     public void ResetGame()
     {
+        SoundManager.PressButton();
         //start scene has index 0
         SceneManager.LoadScene(0);
     }
 
     public void OpenSettings()
     {
+        SoundManager.PressButton();
         MenuHolder.SetActive(false);
         SettingsHolder.SetActive(true);
     }
 
     public void BacktoMenu()
     {
+        SoundManager.PressButton();
         MenuHolder.SetActive(true);
         SettingsHolder.SetActive(false);
     }
@@ -173,7 +178,7 @@ public class TutorialUI : MonoBehaviour
 
     public void AdjustSound()
     {
-        SoundManager.SetVolume(VolumeSlider.value * 100f);
+        SoundManager.SetVolume(VolumeSlider.value);
     }
 
     public void ChangeColorToggle()
