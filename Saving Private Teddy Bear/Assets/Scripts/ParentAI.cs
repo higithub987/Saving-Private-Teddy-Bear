@@ -10,6 +10,7 @@ public class ParentAI : MonoBehaviour
     public float distanceCutoff = 10.0f;
     public float cleanupDelay;
     public float distractionDelayScaling = 2.0f;
+    public float parentSpeed = 5.0f;
 
     [SerializeField]
     private NavMeshAgent parent;
@@ -20,10 +21,9 @@ public class ParentAI : MonoBehaviour
     [SerializeField]
     private LayerMask playerLayer;
 
-    //private stuff
-    private bool activeTracking = false;
-    private bool trackingObj = false;
-    private bool cleaning = false; //jank way to stop the thing if it's cleaning without coroutines
+    private bool activeTracking = false; // is looking for distraction
+    private bool trackingObj = false; // is pathfinding to distraction
+    private bool cleaning = false; // jank way to stop the thing if it's cleaning without coroutines
     private Vector3 MaxValObj;
     private float timer = 0f;
 
@@ -31,10 +31,11 @@ public class ParentAI : MonoBehaviour
     {
         manager = GameObject.Find("Gamemanager").GetComponent<GameManager>();
     }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        parent.speed = parentSpeed;
     }
 
     // Update is called once per frame
@@ -91,10 +92,13 @@ public class ParentAI : MonoBehaviour
                 cleanupDelay = GameManager.distractions[MaxValObj].Item1 * distractionDelayScaling;
                 cleaning = true;
             }
+        } else
+        {
+            parent.SetDestination(player.transform.position);
         }
 
-        //win/lose stuff starts here
-
+        
+        // win/lose logic
         float xdist = player.transform.position.x - transform.position.x;
         float ydist = player.transform.position.y - transform.position.y;
         if(xdist <= xmax && ydist <= ymax)
@@ -102,7 +106,7 @@ public class ParentAI : MonoBehaviour
             Vector3 dir = (player.transform.position - transform.position).normalized;
             Debug.DrawRay(transform.position, dir, Color.red, Mathf.Sqrt(xmax * xmax + ymax * ymax));
             if(Physics.Raycast(transform.position, dir, Mathf.Sqrt(xmax * xmax + ymax * ymax), playerLayer)){
-                //manager.loseGame();
+                // manager.loseGame();
                 Debug.Log("lose");
             }
             else
