@@ -38,10 +38,13 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask wallLayer;
     public LayerMask interactableLayer;
     public LayerMask teddyLayer;
+    [SerializeField]
+    private TeddyAI teddy;
 
     public GameObject cameraObj;
     public Camera cam;
     public InteractablesUI interactablesui;
+    public SoundManager SoundManager;
 
     [Header("Private variables")]
     private bool wallClimbing;
@@ -51,9 +54,9 @@ public class PlayerMovement : MonoBehaviour
     private bool isWallClimbing;
     private KeyCode InteractKey;
 
-
     private void Awake()
     {
+        SoundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         manager = GameObject.Find("Gamemanager").GetComponent<GameManager>();
     }
     private void Start()
@@ -175,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
             interactablesui.HideWallClimb();
             if (Input.GetKeyDown(KeyCode.E))
             {
-                manager.GetTeddy(this.gameObject);
+                teddy.SetHooman(this.gameObject);
             }
         }
         else
@@ -225,6 +228,8 @@ public class PlayerMovement : MonoBehaviour
 
         else if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+
+        //SoundManager.PlayFootStep();
     }
 
     private void SpeedControl()
@@ -242,6 +247,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        SoundManager.jumpSound();
     }
 
     private void ResetJump()
@@ -254,7 +260,7 @@ public class PlayerMovement : MonoBehaviour
             GetInput();
             moveDirection = orientation.up * verticalInput + orientation.right * horizontalInput;
             rb.velocity = moveDirection.normalized * moveSpeed;
-            //transform.position += moveDirection.normalized * climbSpeed * Time.deltaTime;
-        
+        //transform.position += moveDirection.normalized * climbSpeed * Time.deltaTime;
+        SoundManager.climb();
     }
 }

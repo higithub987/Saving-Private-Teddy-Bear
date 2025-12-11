@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        wallClimbing = false;
+        distractions.Clear();
         ToggleHoldWallClimb = true;
     }
 
@@ -77,20 +79,23 @@ public class GameManager : MonoBehaviour
         return ToggleHoldWallClimb;
     }
 
-    public void GetTeddy(GameObject tar)
+    public void GetTeddy()
     {
         hasTeddy = true;
-        teddy.SetHooman(tar);
     }
 
     public void winGame()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         wonGame = true;
         SceneManager.LoadScene(3); //3 is win
     }
 
     public void loseGame()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(4); //4 is lose
     }
 

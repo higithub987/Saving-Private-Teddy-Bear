@@ -25,10 +25,7 @@ public class TeddyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        xwin1 = manager.getWinRoomX1();
-        xwin2 = manager.getWinRoomX2();
-        zwin1 = manager.getWinRoomZ1();
-        zwin2 = manager.getWinRoomZ2();
+        
     }
 
     // Update is called once per frame
@@ -49,5 +46,6 @@ public class TeddyAI : MonoBehaviour
     {
         hooman = target;
         followingHooman = true;
+        manager.GetTeddy();
     }
 }

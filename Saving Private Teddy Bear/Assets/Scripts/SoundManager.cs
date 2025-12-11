@@ -11,10 +11,14 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioSource audioSource;
     [SerializeField]
-    private AudioClip buttonSound, vaseSound, ballSound, cupSound;
+    private AudioSource movementSource, climbSource;
+    [SerializeField]
+    private AudioClip buttonSound, vaseSound, ballSound, cupSound, footStep, jump, wallClimb;
     [SerializeField]
     private AudioMixer mixer;
 
+    private float timer1, timer2 = 0f;
+    
     //Singleton
     public static SoundManager Instance;
 
@@ -72,5 +76,46 @@ public class SoundManager : MonoBehaviour
     public void BreakCup()
     {
         audioSource.PlayOneShot(cupSound, SoundVolume);
+    }
+
+    public void PlayFootStep()
+    {
+        climbSource.loop = false;
+        climbSource.Stop();
+        timer1 += Time.deltaTime;
+        if (timer1 <= movementSource.clip.length)
+        {
+            return;
+        }
+        else
+        {
+            movementSource.volume = SoundVolume;
+            movementSource.Play();
+            timer1 = 0;
+        }
+        
+    }
+
+    public void jumpSound()
+    {
+        audioSource.PlayOneShot(jump, SoundVolume);
+    }
+
+    public void climb()
+    {
+        movementSource.loop = false;
+        movementSource.Stop();
+        timer2 += Time.deltaTime;
+        if(timer2 <= climbSource.clip.length)
+        {
+            return;
+        }
+        else
+        {
+            climbSource.volume = SoundVolume;
+            climbSource.Play();
+            timer2 = 0;
+        }
+        
     }
 }

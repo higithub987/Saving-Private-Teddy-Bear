@@ -113,8 +113,8 @@ public class ParentAI : MonoBehaviour
             Vector3 dir = (player.transform.position - transform.position).normalized;
             Debug.DrawRay(transform.position, dir, Color.red, Mathf.Sqrt(xmax * xmax + ymax * ymax));
             if(Physics.Raycast(transform.position, dir, Mathf.Sqrt(xmax * xmax + ymax * ymax), playerLayer)){
-                // manager.loseGame();
-                Debug.Log("lose");
+                manager.loseGame();
+                //Debug.Log("lose");
             }
             else
             {
