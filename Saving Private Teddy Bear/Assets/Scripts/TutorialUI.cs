@@ -29,6 +29,8 @@ public class TutorialUI : MonoBehaviour
     private GameObject WallClimbStuff;
     [SerializeField]
     private GameObject InteractableVase;
+    [SerializeField]
+    private GameObject parent;
 
 
     //declare private variables here
@@ -37,7 +39,8 @@ public class TutorialUI : MonoBehaviour
     private Color SelectedColor = Color.gray;
     private bool isPaused;
     private bool WPressed, APressed, SPressed, DPressed, SpacePressed = false;
-    private bool WallClimbed, InteractableUsed, ParentDistracted = false;
+    private bool WallClimbed, InteractableUsed =false;
+    public static bool ParentDistracted = false;
     private List<string> texts = new List<string> {
         "Welcome to Saving Private Teddy Bear!\n Press W to move forward and start the game!",//0
         "Press A to move right. ",//1
@@ -70,6 +73,7 @@ public class TutorialUI : MonoBehaviour
         VolumeSlider.value = SoundManager.GetVolume();
         InteractableVase.SetActive(false);
         SetTutorialText();
+        parent.SetActive(false);
     }
 
     // Update is called once per frame
@@ -129,6 +133,7 @@ public class TutorialUI : MonoBehaviour
         if(textind >= 6)
         {
             InteractableVase.SetActive(true);
+            parent.SetActive(true);
         }
     }
 

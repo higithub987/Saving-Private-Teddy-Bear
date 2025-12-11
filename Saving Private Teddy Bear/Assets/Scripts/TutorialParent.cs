@@ -19,9 +19,13 @@ public class TutorialParent : MonoBehaviour
     private GameObject player;
     [SerializeField]
     private LayerMask playerLayer;
+    [SerializeField]
+    private float rangeCheck;
+    [SerializeField]
+    private TutorialUI tutorialUI;
 
     //private stuff
-    private bool activeTracking = false;
+    private bool activeTracking = true;
     private bool trackingObj = false;
     private bool cleaning = false; //jank way to stop the thing if it's cleaning without coroutines
     private Vector3 MaxValObj;
@@ -34,7 +38,7 @@ public class TutorialParent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        parent.SetDestination(transform.position);
     }
 
     // Update is called once per frame
@@ -43,18 +47,21 @@ public class TutorialParent : MonoBehaviour
         if (cleaning)
         {
             timer += Time.deltaTime;
-
             if (timer >= cleanupDelay)
             {
                 cleaning = false;
                 Destroy(GameManager.distractions[MaxValObj].Item2);
                 GameManager.distractions.Remove(MaxValObj);
+                TutorialUI.ParentDistracted = true;
+                cleaning = false;
             }
             return;
+
         }
         else if (activeTracking)
         {
-            if (!trackingObj)
+            Debug.Log(GameManager.distractions.Count == 0);
+            if (!trackingObj && GameManager.distractions.Count != 0)
             {
                 float maxval = 0f;
                 foreach (Vector3 key in GameManager.distractions.Keys)
@@ -70,7 +77,7 @@ public class TutorialParent : MonoBehaviour
                 trackingObj = true;
                 return;
             }
-            else
+            else if(trackingObj)
             {
                 parent.SetDestination(MaxValObj);
                 foreach (Vector3 key in GameManager.distractions.Keys)
@@ -82,12 +89,16 @@ public class TutorialParent : MonoBehaviour
                         MaxValObj = key;
                     }
                 }
+                float distance = Vector3.Distance(transform.position, MaxValObj);
+                if (distance <= rangeCheck)
+                {
+                    cleanupDelay = GameManager.distractions[MaxValObj].Item1 * distractionDelayScaling;
+                    trackingObj = false;
+
+                    cleaning = true;
+                }
             }
-            if (transform.position == MaxValObj)
-            {
-                cleanupDelay = GameManager.distractions[MaxValObj].Item1 * distractionDelayScaling;
-                cleaning = true;
-            }
+            
         }
     }
 
