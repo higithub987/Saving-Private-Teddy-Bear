@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ParentAI : MonoBehaviour
+public class TutorialParent : MonoBehaviour
 {
     public GameManager manager;
 
@@ -40,14 +40,11 @@ public class ParentAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //tracking stuff here
-        activeTracking = !(GameManager.distractions.Count == 0);
-        //this is highest priority, do everything else in else if
         if (cleaning)
         {
             timer += Time.deltaTime;
-            
-            if(timer >= cleanupDelay)
+
+            if (timer >= cleanupDelay)
             {
                 cleaning = false;
                 Destroy(GameManager.distractions[MaxValObj].Item2);
@@ -86,29 +83,13 @@ public class ParentAI : MonoBehaviour
                     }
                 }
             }
-            if(transform.position == MaxValObj)
+            if (transform.position == MaxValObj)
             {
                 cleanupDelay = GameManager.distractions[MaxValObj].Item1 * distractionDelayScaling;
                 cleaning = true;
             }
         }
-
-        //win/lose stuff starts here
-
-        float xdist = player.transform.position.x - transform.position.x;
-        float ydist = player.transform.position.y - transform.position.y;
-        if(xdist <= xmax && ydist <= ymax)
-        {
-            Vector3 dir = (player.transform.position - transform.position).normalized;
-            Debug.DrawRay(transform.position, dir, Color.red, Mathf.Sqrt(xmax * xmax + ymax * ymax));
-            if(Physics.Raycast(transform.position, dir, Mathf.Sqrt(xmax * xmax + ymax * ymax), playerLayer)){
-                //manager.loseGame();
-                Debug.Log("lose");
-            }
-            else
-            {
-                return;
-            }
-        }
     }
+
+
 }

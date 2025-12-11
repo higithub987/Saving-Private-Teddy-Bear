@@ -51,46 +51,53 @@ public class StartMenu : MonoBehaviour
 
     public void EndGame()
     {
+        SoundManager.PressButton();
         Application.Quit();
     }
 
     public void StartGame()
     {
+        SoundManager.PressButton();
         //SampleScene is our main scene, with index 1
         SceneManager.LoadScene(1);
     }
 
     public void Tutorial()
     {
+        SoundManager.PressButton();
         //Tutorial scene has index 2
         SceneManager.LoadScene(2);
     }
 
     public void OpenSettings()
     {
+        SoundManager.PressButton();
         MenuHolder.SetActive(false);
         SettingsHolder.SetActive(true);
     }
 
     public void BacktoMenu()
     {
+        SoundManager.PressButton();
         MenuHolder.SetActive(true);
         SettingsHolder.SetActive(false);
     }
 
     public void ToggleWallClimb()
     {
+        SoundManager.PressButton();
         manager.ToggleWall();
     }
 
     public void HoldWallClimb()
     {
+        SoundManager.PressButton();
         manager.HoldWall();
     }
 
     public void AdjustSound()
     {
-        SoundManager.SetVolume(VolumeSlider.value * 100f);
+        SoundManager.SetVolume(VolumeSlider.value);
     }
 
     public void ChangeColorToggle()

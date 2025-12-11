@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool grounded;
 
-    public GameManager manager; 
+    public GameManager manager;
 
     public Transform orientation;
     float horizontalInput;
