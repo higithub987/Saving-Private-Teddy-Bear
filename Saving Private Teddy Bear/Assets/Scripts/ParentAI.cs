@@ -21,6 +21,8 @@ public class ParentAI : MonoBehaviour
     [SerializeField]
     private LayerMask playerLayer;
 
+    private float rangeCheck = 2f;
+
     private bool activeTracking = false; // is looking for distraction
     private bool trackingObj = false; // is pathfinding to distraction
     private bool cleaning = false; // jank way to stop the thing if it's cleaning without coroutines
@@ -53,10 +55,11 @@ public class ParentAI : MonoBehaviour
                 cleaning = false;
                 Destroy(GameManager.distractions[MaxValObj].Item2);
                 GameManager.distractions.Remove(MaxValObj);
+                cleaning = false;
             }
             return;
         }
-        else if (activeTracking)
+        else if (activeTracking && GameManager.distractions.Count != 0)
         {
             if (!trackingObj)
             {
@@ -87,12 +90,16 @@ public class ParentAI : MonoBehaviour
                     }
                 }
             }
-            if(transform.position == MaxValObj)
+            float distance = Vector3.Distance(transform.position, MaxValObj);
+            if (distance <= rangeCheck)
             {
                 cleanupDelay = GameManager.distractions[MaxValObj].Item1 * distractionDelayScaling;
+                trackingObj = false;
+
                 cleaning = true;
             }
-        } else
+        } 
+        else
         {
             parent.SetDestination(player.transform.position);
         }

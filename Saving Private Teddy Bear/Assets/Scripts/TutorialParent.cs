@@ -60,7 +60,6 @@ public class TutorialParent : MonoBehaviour
         }
         else if (activeTracking)
         {
-            Debug.Log(GameManager.distractions.Count == 0);
             if (!trackingObj && GameManager.distractions.Count != 0)
             {
                 float maxval = 0f;

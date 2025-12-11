@@ -766,9 +766,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1202925129}
     - target: {fileID: 2230228759564416793, guid: b78161650e65d3a46a3677c1a47dd7c5, type: 3}
+      propertyPath: moveSpeed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2230228759564416793, guid: b78161650e65d3a46a3677c1a47dd7c5, type: 3}
       propertyPath: interactablesui
       value: 
       objectReference: {fileID: 1462845059}
+    - target: {fileID: 2230228759564416793, guid: b78161650e65d3a46a3677c1a47dd7c5, type: 3}
+      propertyPath: teddyLayer.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 2230228759564416793, guid: b78161650e65d3a46a3677c1a47dd7c5, type: 3}
       propertyPath: interactableLayer.m_Bits
       value: 8
@@ -2182,6 +2190,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   rangeCheck: 3
+  tutorialUI: {fileID: 0}
 --- !u!195 &1046753641
 NavMeshAgent:
   m_ObjectHideFlags: 0

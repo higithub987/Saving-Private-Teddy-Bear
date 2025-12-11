@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
+
     }
 
     private void Update()
@@ -152,7 +153,6 @@ public class PlayerMovement : MonoBehaviour
 
         wallClimbing = ClimbKeyHeld && CanWallClimb;
         manager.setClimbing(wallClimbing);
-
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 1.5f, interactableLayer))
         {
