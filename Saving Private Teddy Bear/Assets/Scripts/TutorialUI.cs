@@ -80,6 +80,7 @@ public class TutorialUI : MonoBehaviour
     void Update()
     {
         int textind = SetTutorialText();
+        
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (isPaused)
@@ -100,6 +101,10 @@ public class TutorialUI : MonoBehaviour
                 MenuHolder.SetActive(true);
                 SettingsHolder.SetActive(false);
             }
+        }
+        if (textind > 7)
+        {
+            return;
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
