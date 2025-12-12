@@ -56,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1;
         SoundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         manager = GameObject.Find("Gamemanager").GetComponent<GameManager>();
     }
