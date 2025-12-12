@@ -446,6 +446,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1263124822}
     m_Modifications:
+    - target: {fileID: 516907194380725584, guid: dcbfb0e960eb2324b983f621db81b658, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1282785980}
     - target: {fileID: 1357073458917783774, guid: dcbfb0e960eb2324b983f621db81b658, type: 3}
       propertyPath: m_LocalPosition.x
       value: 31.658571
@@ -4796,7 +4800,7 @@ PrefabInstance:
     - target: {fileID: 1624343132814969361, guid: 979115f55646a7d448810e261ff4ba26, type: 3}
       propertyPath: cam
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1282785980}
     - target: {fileID: 1624343132814969361, guid: 979115f55646a7d448810e261ff4ba26, type: 3}
       propertyPath: objectName
       value: tutorvase
@@ -5143,6 +5147,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1263124822}
     m_Modifications:
+    - target: {fileID: 1624343132814969361, guid: 979115f55646a7d448810e261ff4ba26, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1282785980}
     - target: {fileID: 2686880996593333467, guid: 979115f55646a7d448810e261ff4ba26, type: 3}
       propertyPath: m_Name
       value: Vase (4)
@@ -5367,6 +5375,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1263124822}
     m_Modifications:
+    - target: {fileID: 1624343132814969361, guid: 979115f55646a7d448810e261ff4ba26, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1282785980}
     - target: {fileID: 2686880996593333467, guid: 979115f55646a7d448810e261ff4ba26, type: 3}
       propertyPath: m_Name
       value: Vase (3)
@@ -9168,13 +9180,36 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4220397720699001815, guid: 139a4857504a713449cd8045e45935cd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1045477880}
   m_SourcePrefab: {fileID: 100100000, guid: 139a4857504a713449cd8045e45935cd, type: 3}
 --- !u!4 &1045477878 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3592198982921716077, guid: 139a4857504a713449cd8045e45935cd, type: 3}
   m_PrefabInstance: {fileID: 1045477877}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1045477879 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4220397720699001815, guid: 139a4857504a713449cd8045e45935cd, type: 3}
+  m_PrefabInstance: {fileID: 1045477877}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1045477880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045477879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b734fc89905982b41971c75739c0b4cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectName: cup
+  cam: {fileID: 1282785980}
+  soundmanager: {fileID: 0}
 --- !u!1001 &1071714015
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11618,6 +11653,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1263124822}
     m_Modifications:
+    - target: {fileID: 1624343132814969361, guid: 979115f55646a7d448810e261ff4ba26, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1282785980}
     - target: {fileID: 2686880996593333467, guid: 979115f55646a7d448810e261ff4ba26, type: 3}
       propertyPath: m_Name
       value: Vase (1)
@@ -14563,6 +14602,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1263124822}
     m_Modifications:
+    - target: {fileID: 1624343132814969361, guid: 979115f55646a7d448810e261ff4ba26, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1282785980}
     - target: {fileID: 2686880996593333467, guid: 979115f55646a7d448810e261ff4ba26, type: 3}
       propertyPath: m_Name
       value: Vase (2)
@@ -16314,13 +16357,36 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4220397720699001815, guid: 139a4857504a713449cd8045e45935cd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2025221990}
   m_SourcePrefab: {fileID: 100100000, guid: 139a4857504a713449cd8045e45935cd, type: 3}
 --- !u!4 &2025221988 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3592198982921716077, guid: 139a4857504a713449cd8045e45935cd, type: 3}
   m_PrefabInstance: {fileID: 2025221987}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2025221989 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4220397720699001815, guid: 139a4857504a713449cd8045e45935cd, type: 3}
+  m_PrefabInstance: {fileID: 2025221987}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2025221990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025221989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b734fc89905982b41971c75739c0b4cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectName: cup
+  cam: {fileID: 1282785980}
+  soundmanager: {fileID: 0}
 --- !u!1 &2029070289
 GameObject:
   m_ObjectHideFlags: 0
@@ -17069,13 +17135,36 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4220397720699001815, guid: 139a4857504a713449cd8045e45935cd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2102444335}
   m_SourcePrefab: {fileID: 100100000, guid: 139a4857504a713449cd8045e45935cd, type: 3}
 --- !u!4 &2102444333 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3592198982921716077, guid: 139a4857504a713449cd8045e45935cd, type: 3}
   m_PrefabInstance: {fileID: 2102444332}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2102444334 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4220397720699001815, guid: 139a4857504a713449cd8045e45935cd, type: 3}
+  m_PrefabInstance: {fileID: 2102444332}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2102444335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102444334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b734fc89905982b41971c75739c0b4cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectName: cup
+  cam: {fileID: 1282785980}
+  soundmanager: {fileID: 0}
 --- !u!1 &2134526021
 GameObject:
   m_ObjectHideFlags: 0
