@@ -31,7 +31,7 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(SoundVolume);
+        //Debug.Log(this.gameObject == null);
     }
 
     void Awake()

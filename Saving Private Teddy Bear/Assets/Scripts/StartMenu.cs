@@ -32,6 +32,7 @@ public class StartMenu : MonoBehaviour
 
     private void Awake()
     {
+        SoundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         manager = GameObject.Find("Gamemanager").GetComponent<GameManager>();
     }
     // Start is called before the first frame update
